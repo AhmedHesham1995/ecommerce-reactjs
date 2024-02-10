@@ -54,3 +54,26 @@
     color: #000000;
   }
  
+
+
+
+
+
+  /* three cols styles*/
+  .product-list {
+    display: flex;
+    flex-wrap: wrap; /* Add this to allow wrapping */
+    justify-content: space-between; /* Add this to evenly distribute items */
+  }
+  
+  .product-card {
+    width: calc(33.33% - 20px); /* Set width to one-third minus margins */
+    margin-bottom: 20px;
+    /* Add other styles for the product card */
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+  }
+  
