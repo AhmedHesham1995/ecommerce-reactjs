@@ -23,13 +23,15 @@ const ProductList = () => {
     }, []);
 
     return (
-        <div>
+        <div className='body'>
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <div className="product-list">
+                <div className='container'>
+                 <div className="">
+                <div className="product-list row">
                 {products.map(product => (
-                  <div key={product._id} className="product-card">
+                  <div key={product._id} className="product-card col-lg-4 col-md-6 col-sm-12">
                     <img src={product.thumbnail} alt={product.title} className="product-image" />
                     <h2>{product.title}</h2>
                     <p>{product.description}</p>
@@ -42,7 +44,9 @@ const ProductList = () => {
                   </div>
                 ))}
               </div>
-
+              </div>
+                
+               </div>
             )}
         </div>
     );
