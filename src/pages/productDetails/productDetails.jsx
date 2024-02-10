@@ -29,7 +29,7 @@ const ProductDetails = () => {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="body">
+    <div className="body pt-5">
     <div className="container">
       <div className="row">
         <div className="col-lg-4 col-md-6">
@@ -52,11 +52,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="col-lg-1 col-md-6">
-          <div className="">
-            <img src={product.thumbnail} alt="Product Thumbnail" />
-          </div>
-        </div>
+  
     </div></div>
   );
 };
