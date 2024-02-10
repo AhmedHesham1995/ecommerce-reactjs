@@ -1,6 +1,7 @@
 
 
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import'./product.css'
 const ProductList = () => {
@@ -27,26 +28,46 @@ const ProductList = () => {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <div className='container'>
-                 <div className="">
-                <div className="product-list row">
+            //     <div className='container'>
+            //      <div className="">
+            //     <div className="product-list row">
+            //     {products.map(product => (
+            //       <div key={product._id} className="product-card col-lg-4 col-md-6 col-sm-12">
+            //         <img src={product.thumbnail} alt={product.title} className="product-image" />
+            //         <h2>{product.title}</h2>
+            //         <p>{product.description}</p>
+            //         <div className='row'>
+            //         <p className='des col-8 '><span className='number'>{product.price}$</span>/night</p>
+            //         <p className='des col-2'><span>{product.beds}</span>beds</p>
+            //         <p className='des col-2'><span>{product.distance}</span>m</p>
+          
+            //         </div>
+            //       </div>
+            //     ))}
+            //   </div>
+            //   </div>
+                
+            //    </div>
+            <div className='container'>
+            <div className="">
+              <div className="product-list row">
                 {products.map(product => (
                   <div key={product._id} className="product-card col-lg-4 col-md-6 col-sm-12">
-                    <img src={product.thumbnail} alt={product.title} className="product-image" />
-                    <h2>{product.title}</h2>
-                    <p>{product.description}</p>
-                    <div className='row'>
-                    <p className='des col-8 '><span className='number'>{product.price}$</span>/night</p>
-                    <p className='des col-2'><span>{product.beds}</span>beds</p>
-                    <p className='des col-2'><span>{product.distance}</span>m</p>
-          
-                    </div>
+                    <Link to={`/product/${product._id}`} className="product-link">
+                      <img src={product.thumbnail} alt={product.title} className="product-image" />
+                      <h2>{product.title}</h2>
+                      <p>{product.description}</p>
+                      <div className='row'>
+                        <p className='des col-8 '><span className='number'>{product.price}$</span>/night</p>
+                        <p className='des col-2'><span>{product.beds}</span>beds</p>
+                        <p className='des col-2'><span>{product.distance}</span>m</p>
+                      </div>
+                    </Link>
                   </div>
                 ))}
               </div>
-              </div>
-                
-               </div>
+            </div>
+          </div>
             )}
         </div>
     );

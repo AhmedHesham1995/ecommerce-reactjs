@@ -6,6 +6,8 @@ import AddProduct from './pages/addProduct'
 import ProductList from './pages/productList/product';
 import AppLayout from './component/Applayout/Applayout';
 import { RouterProvider } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ProductDetails from './pages/productDetails/productDetails';
 
 
 const router=createBrowserRouter([
@@ -15,6 +17,7 @@ const router=createBrowserRouter([
     children:[
       {index:true,element:<ProductList/>},
       {path:"add",element:<AddProduct/>},
+      {path:"/product/:id",element:<ProductDetails/>}
 
     ]
 
@@ -29,7 +32,7 @@ function App() {
   return (
     <>
      <RouterProvider router={router}/>
-
+  
     </>
   )
 }
