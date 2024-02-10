@@ -7,7 +7,7 @@ const AppLayout = () => {
     return (
        <>
        <Navbar/>
-       <Search/>
+       {/* <Search/> */}
        <Outlet/>
        </>
     );

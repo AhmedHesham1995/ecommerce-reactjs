@@ -60,3 +60,23 @@
 
 
 
+
+
+
+
+
+
+
+
+  /*search input styles*/
+
+
+  
+  .search-bar {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+}
+
+.search-input {
+    width: 75%;
+}
