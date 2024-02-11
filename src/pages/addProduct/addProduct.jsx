@@ -22,7 +22,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4200/products/add', productData);
+      const response = await axios.post('https://ecommerce-h-r.onrender.com/products/add', productData);
       console.log(response.data); 
       setProductData({
         title: "",
