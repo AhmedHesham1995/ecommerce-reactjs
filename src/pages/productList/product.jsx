@@ -70,7 +70,7 @@ const ProductList = () => {
     return (
         <div className='body pt-5'>
             <div className='d-flex justify-content-between px-5'>
-                <div className='search-bar mb-3 flex-grow-1 me-2'>
+                <div className='search-bar mb-3 col-5 me-2'>
                     <input
                         type='text'
                         placeholder='Search by title...'
@@ -79,7 +79,7 @@ const ProductList = () => {
                         className='form-control search-input w-100'
                     />
                 </div>
-                <div className='category-filter mb-3'>
+                <div className='category-filter col-5 mb-3'>
                     <select
                         value={selectedCategory}
                         onChange={handleCategoryChange}
