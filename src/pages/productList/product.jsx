@@ -19,11 +19,11 @@ const ProductList = () => {
         let response;
         if (selectedCategory) {
           response = await axios.post(
-            "https://ecommerce-api-shpx.onrender.com/products/filterWithCat",
+            "https://ecommerce-h-r.onrender.com/products/filterWithCat",
             { category: selectedCategory }
           );
         } else {
-          response = await axios.get("https://ecommerce-api-shpx.onrender.com/products");
+          response = await axios.get("https://ecommerce-h-r.onrender.com/products");
         }
         setProducts(response.data);
         setLoading(false);
@@ -35,7 +35,7 @@ const ProductList = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://ecommerce-api-shpx.onrender.com/categories");
+        const response = await axios.get("https://ecommerce-h-r.onrender.com/categories");
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -51,11 +51,11 @@ const ProductList = () => {
     setSearchTerm(newSearchTerm);
     try {
       if (newSearchTerm === "") {
-        const response = await axios.get("https://ecommerce-api-shpx.onrender.com/products");
+        const response = await axios.get("https://ecommerce-h-r.onrender.com/products");
         setProducts(response.data);
       } else {
         const response = await axios.post(
-          "https://ecommerce-api-shpx.onrender.com/products/search",
+          "https://ecommerce-h-r.onrender.com/products/search",
           { title: newSearchTerm }
         );
         if (response.data.length === 0) {
