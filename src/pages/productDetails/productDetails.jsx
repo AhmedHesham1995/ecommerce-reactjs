@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
@@ -8,24 +9,53 @@ import "./details.css";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [newCommentText, setNewCommentText] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchProductAndComments = async () => {
       try {
-        const response = await axios.get(
+        // Fetch product details
+        const productResponse = await axios.get(
           `http://localhost:4200/products/${id}`
         );
-        setProduct(response.data);
+        setProduct(productResponse.data);
+
+        // Fetch comments for the product
+        const commentsResponse = await axios.get(
+          `http://localhost:4200/products/${id}/comments`
+        );
+        setComments(commentsResponse.data);
       } catch (error) {
         setError(error.message);
       }
     };
 
-    fetchProduct();
+    fetchProductAndComments();
 
     return () => {};
   }, [id]);
+
+  const handleCommentChange = (e) => {
+    setNewCommentText(e.target.value);
+  };
+
+  const handleAddComment = async () => {
+    try {
+      // Optimistically add the new comment to the comments state
+      const newComment = { text: newCommentText };
+      setComments([...comments, newComment]);
+      setNewCommentText(""); // Clear the textarea
+
+      // Send the request to add the comment
+      await axios.post(`http://localhost:4200/${id}/comments`, {
+        text: newCommentText
+      });
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
 
   if (error) return <div>Error: {error}</div>;
   if (!product) return <div>Product not found</div>;
@@ -43,72 +73,28 @@ const ProductDetails = () => {
               <img src={product.thumbnail} alt="Product Thumbnail" />
             </div>
           </div>
-          <div className="col-lg-6 col-md-6 d-flex align-items-center">
-            <div className="product-info ">
-              <h2 className="">{product.title}</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Adipisci necessitatibus molestiae recusandae laboriosam veniam,
-                incidunt inventore ducimus blanditiis fugiat voluptas! Nisi hic
-                illum iure unde nam reprehenderit autem obcaecati placeat.
-              </p>
+          <div className="col-lg-6 col-md-6">
+            <div className="product-info">
+              <h2>{product.title}</h2>
+              <p>{product.description}</p>
               <p className="des">
-                price:<span className="number">{product.price}$</span>/night
+                Price: <span className="number">{product.price}$</span>/night
               </p>
+              <h3>Comments</h3>
+              <ul>
+                {comments.map((comment, index) => (
+                  <li key={index}>{comment.text}</li>
+                ))}
+              </ul>
+              <div className="comment-form">
+                <textarea
+                  value={newCommentText}
+                  onChange={handleCommentChange}
+                  placeholder="Enter your comment"
+                ></textarea>
+                <button onClick={handleAddComment}>Add Comment</button>
+              </div>
             </div>
-          </div>
-          <div >
-            <Carousel
-              animation={true}
-              showArrows={false}
-              autoPlay={true}
-              infiniteLoop={true}
-              verticalSwipe="natural"
-              selectedItem={product?.images[2]}
-              onChange={handleChange}
-              className="carousel-container h-100 "
-            >
-              {product?.images?.length > 0 ? (
-                product?.images.map((image, index) => (
-                  <div
-                    key={index}
-                    className=""
-                    style={{
-                      height: "400px",
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt={"product images"}
-                      className="h-100"
-                      style={{
-                        objectFit: "contain",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  </div>
-                ))
-              ) : (
-                <div
-                  className=""
-                  style={{
-                    height: "400px",
-                  }}
-                >
-                  <img
-                    src={product?.thumbnail}
-                    alt={"product images"}
-                    className="h-100"
-                    style={{
-                      objectFit: "contain",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  />
-                </div>
-              )}
-            </Carousel>
           </div>
         </div>
       </div>
