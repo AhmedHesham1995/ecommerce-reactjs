@@ -17,12 +17,12 @@ const ProductDetails = () => {
     const fetchProductAndComments = async () => {
       try {
         const productResponse = await axios.get(
-          `http://localhost:4200/products/${id}`
+          `https://ecommerce-api-shpx.onrender.com/products/${id}`
         );
         setProduct(productResponse.data);
 
         const commentsResponse = await axios.get(
-          `http://localhost:4200/products/${id}/comments`
+          `https://ecommerce-api-shpx.onrender.com/products/${id}/comments`
         );
         setComments(commentsResponse.data);
       } catch (error) {
@@ -45,7 +45,7 @@ const ProductDetails = () => {
       setComments([...comments, newComment]);
       setNewCommentText(""); // Clear the textarea
 
-      await axios.post(`http://localhost:4200/${id}/comments`, {
+      await axios.post(`https://ecommerce-api-shpx.onrender.com/${id}/comments`, {
         text: newCommentText,
       });
     } catch (error) {
