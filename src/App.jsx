@@ -17,7 +17,6 @@ const router=createBrowserRouter([
       {index:true,element:<ProductList/>},
       {path:"add",element:<AddProduct/>},
       {path:"/product/:id",element:<ProductDetails/>},
-      {path:"drag", element:<useFilePreview />}
     ]
 
   },

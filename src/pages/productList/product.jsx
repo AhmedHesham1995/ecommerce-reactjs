@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -23,7 +22,9 @@ const ProductList = () => {
             { category: selectedCategory }
           );
         } else {
-          response = await axios.get("https://ecommerce-h-r.onrender.com/products");
+          response = await axios.get(
+            "https://ecommerce-h-r.onrender.com/products"
+          );
         }
         setProducts(response.data);
         setLoading(false);
@@ -35,7 +36,9 @@ const ProductList = () => {
 
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://ecommerce-h-r.onrender.com/categories");
+        const response = await axios.get(
+          "https://ecommerce-h-r.onrender.com/categories"
+        );
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -51,7 +54,9 @@ const ProductList = () => {
     setSearchTerm(newSearchTerm);
     try {
       if (newSearchTerm === "") {
-        const response = await axios.get("https://ecommerce-h-r.onrender.com/products");
+        const response = await axios.get(
+          "https://ecommerce-h-r.onrender.com/products"
+        );
         setProducts(response.data);
       } else {
         const response = await axios.post(
@@ -75,8 +80,8 @@ const ProductList = () => {
 
   return (
     <div className="body pt-5">
-      <div className="d-flex justify-content-between px-5">
-        <div className="search-bar mb-3 col-5 me-2">
+      <div className="d-flex flex-column flex-sm-row justify-content-between px-3 px-sm-5">
+        <div className="search-bar mb-3 col-sm-12 col-md-6 me-2">
           <div
             style={{
               position: "relative",
@@ -105,15 +110,13 @@ const ProductList = () => {
             />
           </div>
         </div>
-        <div className="category-filter col-5 mb-3">
+        <div className="category-filter mb-3 col-sm-12 col-md-6">
           <select
             value={selectedCategory}
             onChange={handleCategoryChange}
             className="form-control w-100"
           >
-            <option value="">
-              All Categories
-            </option>
+            <option value="">All Categories</option>
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category}
@@ -122,6 +125,7 @@ const ProductList = () => {
           </select>
         </div>
       </div>
+
       {loading ? (
         <p>Loading...</p>
       ) : (
