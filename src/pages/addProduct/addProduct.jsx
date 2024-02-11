@@ -1,8 +1,9 @@
 
 import  { useState } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const AddProduct = () => {
+  const navigate = useNavigate();
   const [productData, setProductData] = useState({
     title: "",
     category: "",
@@ -32,6 +33,7 @@ const AddProduct = () => {
         images: [],
         price: 0
       });
+      navigate('/');
     } catch (error) {
       console.error('Error adding product:', error);
     }

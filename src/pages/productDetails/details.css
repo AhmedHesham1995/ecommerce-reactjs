@@ -59,3 +59,14 @@
   margin-bottom: 10px;
   border-radius: 5px;
 }
+
+
+
+svg{
+  margin-right: 20px;
+}
+
+.loc{
+  font-size: 17px !important;
+  margin: 20px 0 ;
+}

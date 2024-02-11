@@ -1,9 +1,11 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./product.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +16,15 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:4200/products");
+        let response;
+        if (selectedCategory) {
+          response = await axios.post(
+            "http://localhost:4200/products/filterWithCat",
+            { category: selectedCategory }
+          );
+        } else {
+          response = await axios.get("http://localhost:4200/products");
+        }
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
@@ -34,7 +44,7 @@ const ProductList = () => {
 
     fetchProducts();
     fetchCategories();
-  }, []);
+  }, [selectedCategory]);
 
   const handleInputChange = async (e) => {
     const newSearchTerm = e.target.value.trim();
@@ -58,18 +68,9 @@ const ProductList = () => {
     }
   };
 
-  const handleCategoryChange = async (e) => {
+  const handleCategoryChange = (e) => {
     const category = e.target.value;
     setSelectedCategory(category);
-    try {
-      const response = await axios.post(
-        "http://localhost:4200/products/filterWithCat",
-        { category }
-      );
-      setProducts(response.data);
-    } catch (error) {
-      console.error("Error filtering products by category:", error);
-    }
   };
 
   return (
@@ -110,7 +111,7 @@ const ProductList = () => {
             onChange={handleCategoryChange}
             className="form-control w-100"
           >
-            <option hidden value="">
+            <option value="">
               All Categories
             </option>
             {categories.map((category) => (

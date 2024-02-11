@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { faComment,faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import "./details.css";
 
@@ -74,9 +74,13 @@ const ProductDetails = () => {
                 eum tempora magnam veniam soluta incidunt neque, nam ullam,
                 voluptatibus voluptas exercitationem nobis?
               </p>
+              <p className="des loc">
+                <FontAwesomeIcon  icon={faLocationDot} />{product.location}
+              </p>
               <p className="des">
                 Price: <span className="number">{product.price}$</span>/night
               </p>
+              
             </div>
           </div>
         </div>
