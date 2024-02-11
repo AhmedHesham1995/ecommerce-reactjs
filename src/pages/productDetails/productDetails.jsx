@@ -1,8 +1,8 @@
-
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Carousel } from "react-responsive-carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
 
 import "./details.css";
 
@@ -16,13 +16,11 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProductAndComments = async () => {
       try {
-        // Fetch product details
         const productResponse = await axios.get(
           `http://localhost:4200/products/${id}`
         );
         setProduct(productResponse.data);
 
-        // Fetch comments for the product
         const commentsResponse = await axios.get(
           `http://localhost:4200/products/${id}/comments`
         );
@@ -43,14 +41,12 @@ const ProductDetails = () => {
 
   const handleAddComment = async () => {
     try {
-      // Optimistically add the new comment to the comments state
       const newComment = { text: newCommentText };
       setComments([...comments, newComment]);
       setNewCommentText(""); // Clear the textarea
 
-      // Send the request to add the comment
       await axios.post(`http://localhost:4200/${id}/comments`, {
-        text: newCommentText
+        text: newCommentText,
       });
     } catch (error) {
       console.error("Error adding comment:", error);
@@ -59,10 +55,6 @@ const ProductDetails = () => {
 
   if (error) return <div>Error: {error}</div>;
   if (!product) return <div>Product not found</div>;
-
-  const handleChange = (index) => {
-    // Handle carousel change
-  };
 
   return (
     <div className="body pt-5">
@@ -73,26 +65,51 @@ const ProductDetails = () => {
               <img src={product.thumbnail} alt="Product Thumbnail" />
             </div>
           </div>
-          <div className="col-lg-6 col-md-6">
+          <div className="col-lg-6 col-md-6 d-flex align-items-center">
             <div className="product-info">
               <h2>{product.title}</h2>
-              <p>{product.description}</p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
+                fugit minima ea, reprehenderit nostrum repellendus laborum velit
+                eum tempora magnam veniam soluta incidunt neque, nam ullam,
+                voluptatibus voluptas exercitationem nobis?
+              </p>
               <p className="des">
                 Price: <span className="number">{product.price}$</span>/night
               </p>
-              <h3>Comments</h3>
-              <ul>
+            </div>
+          </div>
+        </div>
+        <div className="row mt-5 pb-3 my-3">
+          <div className="col-12">
+            <h2 className="text-center">Comments</h2>
+            <div className="container ">
+              <ul className="comment-list">
                 {comments.map((comment, index) => (
-                  <li key={index}>{comment.text}</li>
+                  <li key={index} className="comment-item">
+                    <FontAwesomeIcon
+                      icon={faComment}
+                      className="comment-icon"
+                    />
+                    {comment.text}
+                  </li>
                 ))}
               </ul>
+
               <div className="comment-form">
-                <textarea
+                <p className="comments">Leave your Comment</p>
+                <input
                   value={newCommentText}
                   onChange={handleCommentChange}
                   placeholder="Enter your comment"
-                ></textarea>
-                <button onClick={handleAddComment}>Add Comment</button>
+                  className=" col-8 styled-textarea me-2"
+                ></input>
+                <button
+                  onClick={handleAddComment}
+                  className=" btn btn-success  "
+                >
+                  Add Comment
+                </button>
               </div>
             </div>
           </div>

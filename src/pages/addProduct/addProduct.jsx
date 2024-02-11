@@ -22,8 +22,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:4200/products/add', productData);
-      console.log(response.data); // Log the response from the backend
-      // Optionally, you can reset the form after successful submission
+      console.log(response.data); 
       setProductData({
         title: "",
         category: "",
@@ -55,7 +54,6 @@ const AddProduct = () => {
                   <option value="" hidden></option>
                   <option value="flat">Flat</option>
                   <option value="villa">Villa</option>
-                  {/* Add more options as needed */}
                 </select>
               </div>
             </div>

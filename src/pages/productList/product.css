@@ -10,7 +10,6 @@
 
 }
   .product-card {
-    /* width: 400px; */
     padding: 20px;
  
   }
@@ -56,27 +55,14 @@
     color: #000000;
   }
  
-
-
-
-
-
-
-
-
-
-
-
-
-  /*search input styles*/
-
-
-  
   .search-bar {
     display: flex;
-    justify-content: center; /* Center horizontally */
+    justify-content: center;
 }
 
 .search-input {
     width: 75%;
+}
+a{
+  text-decoration: none;
 }

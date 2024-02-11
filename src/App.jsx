@@ -2,11 +2,10 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  createBrowserRouter } from 'react-router-dom';
-import AddProduct from './pages/addProduct'
+import AddProduct from './pages/addProduct/addProduct'
 import ProductList from './pages/productList/product';
 import AppLayout from './component/Applayout/Applayout';
 import { RouterProvider } from 'react-router-dom';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductDetails from './pages/productDetails/productDetails';
 
 
